@@ -1,0 +1,8 @@
+{
+    "name": "底层链API",
+    "version": "1.0.0",
+    "description": "底层链项目API文档",
+    "title": "UDO API",
+    "url": "http://localhost:4000/apidoc",
+    "forceLanguage": "zh-cn"
+}

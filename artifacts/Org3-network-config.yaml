@@ -1,0 +1,181 @@
+---
+#
+# The network connection profile provides client applications the information about the target
+# blockchain network that are necessary for the applications to interact with it. These are all
+# knowledge that must be acquired from out-of-band sources. This file provides such a source.
+#
+name: "udo-api"
+
+#
+# Any properties with an "x-" prefix will be treated as application-specific, exactly like how naming
+# in HTTP headers or swagger properties work. The SDK will simply ignore these fields and leave
+# them for the applications to process. This is a mechanism for different components of an application
+# to exchange information that are not part of the standard schema described below. In particular,
+# the "x-type" property with the "hlfv1" value example below is used by Hyperledger Composer to
+# determine the type of Fabric networks (v0.6 vs. v1.0) it needs to work with.
+#
+x-type: "hlfv1"
+
+#
+# Describe what the target network is/does.
+#
+description: "UDO Platform Network"
+
+#
+# Schema version of the content. Used by the SDK to apply the corresponding parsing rules.
+#
+version: "1.0"
+
+#
+# The client section will be added on a per org basis see org1.yaml and org2.yaml
+#
+#client:
+
+client:
+  # Which organization does this application instance belong to? The value must be the name of an org
+  # defined under "organizations" ... see below
+  organization: Org1
+
+  # Some SDKs support pluggable KV stores, the properties under "credentialStore"
+  # are implementation specific
+  credentialStore:
+    # Specific to FileKeyValueStore.js or similar implementations in other SDKs. Can be others
+    # if using an alternative impl. For instance, CouchDBKeyValueStore.js would require an object
+    # here for properties like url, db name, etc.
+    #path: "/tmp/hfc-kvs" or <implementation specific properties>
+
+    # Specific to the CryptoSuite implementation. Software-based implementations like
+    # CryptoSuite_ECDSA_AES.js in node SDK requires a key store. PKCS#11 based implementations does
+    # not.
+    cryptoStore:
+      # Specific to the underlying KeyValueStore that backs the crypto key store.
+      #path: "/tmp/hfc-cvs" or <implementation specific properties>
+
+  # Sets the connection timeouts for new peer and orderer objects when the client creates
+  # peer and orderer objects during the client.getPeer() and client.getOrderer() calls
+  # or when the peer and orderer objects are created automatically when a channel
+  # is created by the client.getChannel() call.
+  connection:
+    timeout:
+       peer:
+         # the timeout in seconds to be used on requests to a peer,
+         # for example 'sendTransactionProposal'
+         endorser: 120
+         # the timeout in seconds to be used by applications when waiting for an
+         # event to occur. This time should be used in a javascript timer object
+         # that will cancel the event registration with the channel event hub instance.
+         eventHub: 60
+         # the timeout in seconds to be used when setting up the connection
+         # with a peer event hub. If the peer does not acknowledge the
+         # connection within the time, the application will be notified over the
+         # error callback if provided.
+         eventReg: 3
+       # the timeout in seconds to be used on request to the orderer,
+       # for example
+       orderer: 30
+
+#
+# [Optional]. But most apps would have this section so that channel objects can be constructed
+# based on the content below. If an app is creating channels, then it likely will not need this
+# section.
+#
+channels:
+  # name of the channel
+  timechannel:
+    # Required. list of orderers designated by the application to use for transactions on this
+    # channel. This list can be a result of access control ("org1" can only access "ordererA"), or
+    # operational decisions to share loads from applications among the orderers.  The values must
+    # be "names" of orgs defined under "organizations/peers"
+    orderers:
+      - orderer0.udo.com
+      - orderer1.udo.com
+      - orderer2.udo.com
+
+    # Required. list of peers from participating orgs
+    peers:
+      peer0.org3.udo.com:
+        endorsingPeer: true
+        chaincodeQuery: true
+        ledgerQuery: true
+        eventSource: true
+
+    # [Optional]. what chaincodes are expected to exist on this channel? The application can use
+    # this information to validate that the target peers are in the expected state by comparing
+    # this list with the query results of getInstalledChaincodes() and getInstantiatedChaincodes()
+    chaincodes:
+      # the format follows the "cannonical name" of chaincodes by udo code
+      - mycc:v0
+
+#
+# list of participating organizations in this network
+#
+organizations:
+  Org3:
+    mspid: Org3MSP
+    peers:
+      - peer0.org3.udo.com
+    certificateAuthorities:
+      - ca-org3
+    adminPrivateKey:
+      path: artifacts/channel/crypto-config/peerOrganizations/org3.udo.com/users/Admin@org3.udo.com/msp/keystore/751ad73f59cfc23ada432eb0f00b95971b0bea9392e9c1798f0631e7ad0de34c_sk
+    signedCert:
+      path: artifacts/channel/crypto-config/peerOrganizations/org3.udo.com/users/Admin@org3.udo.com/msp/signcerts/Admin@org3.udo.com-cert.pem
+    admin: 
+      key: artifacts/channel/crypto-config/peerOrganizations/org3.udo.com/users/Admin@org3.udo.com/msp/keystore
+      cert: artifacts/channel/crypto-config/peerOrganizations/org3.udo.com/users/Admin@org3.udo.com/msp/signcerts
+    user: 
+      key: artifacts/channel/crypto-config/peerOrganizations/org3.udo.com/users/User1@org3.udo.com/msp/keystore
+      cert: artifacts/channel/crypto-config/peerOrganizations/org3.udo.com/users/User1@org3.udo.com/msp/signcerts
+    gasUser: 
+      key: artifacts/channel/crypto-config/peerOrganizations/org3.udo.com/users/User1@org3.udo.com/msp/keystore
+      cert: artifacts/channel/crypto-config/peerOrganizations/org3.udo.com/users/User1@org3.udo.com/msp/signcerts
+
+#
+# List of orderers to send transaction and channel create/update requests to. For the time
+# being only one orderer is needed. If more than one is defined, which one get used by the
+# SDK is implementation specific. Consult each SDK's documentation for its handling of orderers.
+#
+orderers:
+  orderer0.udo.com:
+    url: grpcs://192.168.1.245:7050
+
+    # these are standard properties defined by the gRPC library
+    # they will be passed in as-is to gRPC client constructor
+    grpcOptions:
+      ssl-target-name-override: orderer0.udo.com
+      grpc.keepalive_time_ms: 600000
+      request-timeout: 120001
+
+    tlsCACerts:
+      path: artifacts/channel/crypto-config/ordererOrganizations/udo.com/orderers/orderer0.udo.com/tls/ca.crt
+
+#
+# List of peers to send various requests to, including endorsement, query
+# and event listener registration.
+#
+peers: 
+  peer0.org3.udo.com:
+    url: grpcs://192.168.1.119:7051
+    eventUrl: grpcs://192.168.1.119:7053
+    grpcOptions:
+      ssl-target-name-override: peer0.org3.udo.com
+      request-timeout: 12000100
+    tlsCACerts:
+      path: artifacts/channel/crypto-config/peerOrganizations/org3.udo.com/peers/peer0.org3.udo.com/tls/ca.crt
+#
+# Fabric-CA is a special kind of Certificate Authority provided by Hyperledger Fabric which allows
+# certificate management to be done via REST APIs. Application may choose to use a standard
+# Certificate Authority instead of Fabric-CA, in which case this section would not be specified.
+#
+certificateAuthorities:
+  ca-org3:
+    url: https://localhost:7054
+    httpOptions:
+      verify: false
+    tlsCACerts:
+      path: artifacts/channel/crypto-config/peerOrganizations/org3.udo.com/ca/ca.org3.udo.com-cert.pem
+    registrar:
+      - enrollId: admin
+        enrollSecret: adminpw
+    # [Optional] The optional name of the CA.
+    caName: ca-org3

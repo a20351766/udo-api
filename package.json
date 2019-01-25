@@ -1,0 +1,46 @@
+{
+  "name": "udo-api",
+  "version": "1.0.0",
+  "description": "A udo-api example node program to demonstrate using node.js SDK APIs",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "keywords": [
+    "fabric-client sample app",
+    "udo-api node sample",
+    "v1.2 fabric nodesdk sample"
+  ],
+  "engines": {
+    "node": ">=8.9.0",
+    "npm": ">=3.10.10 <=5.6.0"
+  },
+  "license": "Apache-2.0",
+  "dependencies": {
+    "async": "^2.6.1",
+    "augmented-keccak256": "git+https://github.com/CoinFabrik/augmented-keccak256.git",
+    "bignum": "^0.13.0",
+    "bitcoinjs-lib": "^3.3.2",
+    "body-parser": "^1.17.1",
+    "cookie-parser": "^1.4.3",
+    "cors": "^2.8.3",
+    "crypto-browserify": "^3.12.0",
+    "express": "^4.15.2",
+    "express-bearer-token": "^2.1.0",
+    "express-jwt": "^5.1.0",
+    "express-session": "^1.15.2",
+    "extend": "^3.0.2",
+    "fabric-ca-client": "^1.3.0",
+    "fabric-client": "^1.3.0",
+    "fs-extra": "^2.0.0",
+    "jsonwebtoken": "^7.3.0",
+    "log4js": "^0.6.38",
+    "moment": "^2.22.0",
+    "node-mysql": "^0.4.2",
+    "node-schedule": "^1.3.0",
+    "unzip2": "^0.2.5",
+    "uuid": "^3.2.1",
+    "wallet-address-validator": "^0.1.6",
+    "yamljs": "^0.3.0"
+  }
+}

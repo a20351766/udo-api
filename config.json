@@ -1,0 +1,78 @@
+{
+   "host":"localhost",
+   "port":"4000",
+   "jwt_expiretime": "36000",
+   "channelName":"timechannel",
+   "chaincodeName": "mycc",
+   "chaincodeVersion": "v0",
+   "chaincodeType":"golang",
+   "addressPrefix":"U",
+   "CC_SRC_PATH":"../artifacts",
+   "keyValueStore":"/tmp/udo-client-kvs",
+   "eventWaitTime":"40000",
+   "gasType":"1",
+   "gasDesc":"1、表示收取合约用户的手续费;2、所有用户都收取手续费",
+   "admins":[
+      {
+         "username":"admin",
+         "secret":"adminpw"
+      }
+   ],
+    "platCCInstallNode": [
+        {
+            "orgName": "Org1",
+            "userName": "user",
+            "peers": [
+                "peer0.org1.udo.com","peer1.org1.udo.com"
+            ]
+        },
+        {
+            "orgName": "Org2",
+            "userName": "user",
+            "peers": [
+                "peer0.org2.udo.com","peer1.org2.udo.com"
+            ]
+        }
+    ],
+   "platInstantiate":{
+       "userName": "user",
+       "orgName": "Org1"
+   },
+   "platInvokeNode":{
+       "orgName":"Org1",
+       "userName": "user",
+       "peers":["peer0.org1.udo.com","peer0.org2.udo.com"]
+   },
+   "platQueryNode":{
+        "orgName": "Org1",
+        "userName": "user",
+        "peers": ["peer0.org1.udo.com"]
+    },
+   "busnInstantiate":{
+        "userName": "user",
+        "orgName": "Org2"
+    },
+   "busnInvokeNode": {
+        "orgName": "Org1",
+        "userName": "user",
+        "peers": ["peer0.org1.udo.com","peer0.org2.udo.com"]
+    },
+    "busnQueryNode": {
+        "orgName": "Org2",
+        "userName": "user",
+        "peers": ["peer0.org2.udo.com"]
+    },
+    "busnCCInstallNode": [{
+        "orgName": "Org1",
+        "userName": "user",
+        "peers": ["peer0.org1.udo.com"]
+    },
+    {
+        "orgName": "Org2",
+        "userName": "user",
+        "peers": ["peer0.org2.udo.com"]
+    }],
+    "peers":["120.79.240.69","192.168.1.117"],
+    "deleteCCPort":7057,
+    "request-timeout": 450000
+}

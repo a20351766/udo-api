@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<title>多地址转账</title>
+
+<head>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrapValidator.min.css">
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/bootstrapValidator.min.js"></script>
+    <script src="js/angular.min.js"></script>
+</head>
+
+<body ng-app="wallletApp" ng-controller="walletCtrl">
+    <div class="container">
+        <div class="row">
+            <div  class="div center-block" style="text-align:center;">
+                <form id="myForm" name="myForm" class="form-horizontal">
+                    <div class="form-group">
+                        <label class="ctext-right col-sm-2 col-sm-offset-3 control-label">语言:</label>
+                        <div class="col-sm-2 text-left">
+                            <select class="form-control" id="lang" name="lang" ng-model="lang">
+                                <option value="">-=请选择=-</option>
+                                <option value="zh">中文</option>
+                                <option value="en">英文</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="list-group">
+                        <a href="javascript:void(0);" class="list-group-item active">
+                            <h4 class="list-group-item-heading">
+                                转账方1
+                            </h4>
+                        </a>
+                        <a href="javascript:void(0);" class="list-group-item">
+                            <p class="list-group-item-text">
+                                <div class="form-group">
+                                    <label class="ctext-right col-sm-2 col-sm-offset-3 control-label">转账方私钥:</label>
+                                    <div class="col-sm-6 text-left">
+                                        <input type="text" class="form-control" name="privateKey1" ng-model="privateKey1">
+                                    </div>
+                                </div>
+                            </p>
+                        </a>
+                        <a href="javascript:void(0);" class="list-group-item">
+                            <p class="list-group-item-text">
+                                <div class="form-group">
+                                    <label class="ctext-right col-sm-2 col-sm-offset-3 control-label">转账方地址:</label>
+                                    <div class="col-sm-6 text-left">
+                                        <input type="text" class="form-control" name="address1" ng-model="address1">
+                                    </div>
+                                </div>
+                            </p>
+                        </a>
+                    </div>
+
+
+                    <div class="list-group">
+                        <a href="javascript:void(0);" class="list-group-item active">
+                            <h4 class="list-group-item-heading">
+                                转账方2
+                            </h4>
+                        </a>
+                        <a href="javascript:void(0);" class="list-group-item">
+                            <p class="list-group-item-text">
+                                <div class="form-group">
+                                    <label class="ctext-right col-sm-2 col-sm-offset-3 control-label">转账方私钥:</label>
+                                    <div class="col-sm-6 text-left">
+                                        <input type="text" class="form-control" name="privateKey2" ng-model="privateKey2">
+                                    </div>
+                                </div>
+                            </p>
+                        </a>
+                        <a href="javascript:void(0);" class="list-group-item">
+                            <p class="list-group-item-text">
+                                <div class="form-group">
+                                    <label class="ctext-right col-sm-2 col-sm-offset-3 control-label">转账方地址:</label>
+                                    <div class="col-sm-6 text-left">
+                                        <input type="text" class="form-control" name="address2" ng-model="address2">
+                                    </div>
+                                </div>
+                            </p>
+                        </a>
+                    </div>
+
+                    <div class="list-group">
+                        <a href="javascript:void(0);" class="list-group-item active">
+                            <h4 class="list-group-item-heading">
+                                第一种token
+                            </h4>
+                        </a>
+                        <a href="javascript:void(0);" class="list-group-item">
+                            <p class="list-group-item-text">
+                                <div class="form-group">
+                                    <label class="ctext-right col-sm-2 col-sm-offset-3 control-label">token标识或ID:</label>
+                                    <div class="col-sm-6 text-left">
+                                        <input type="text" class="form-control" name="tokenID1" ng-model="tokenID1">
+                                    </div>
+                                </div>
+                            </p>
+                        </a>
+                        <a href="javascript:void(0);" class="list-group-item">
+                            <p class="list-group-item-text">
+                                <div class="form-group">
+                                    <label class="text-right col-sm-2 control-label">地址1:</label>
+                                    <div class="col-sm-4 text-left">
+                                        <input type="text" class="form-control" name="toAddress11" ng-model="toAddress11" placeholder="请输入收款方地址">
+                                    </div>
+                                    <label class="col-sm-2 control-label">数量1:</label>
+                                    <div class="col-sm-2">
+                                        <input type="text" class="form-control" name="number11" ng-model="number11" placeholder="请输入转账数量">
+                                    </div>
+                                </div>
+                            </p>
+                        </a>
+                        <a href="javascript:void(0);" class="list-group-item">
+                            <p class="list-group-item-text">
+                                <div class="form-group">
+                                    <label class="text-right col-sm-2 control-label">地址2:</label>
+                                    <div class="col-sm-4 text-left">
+                                        <input type="text" class="form-control" name="toAddress12" ng-model="toAddress12" placeholder="请输入收款方地址">
+                                    </div>
+                                    <label class="col-sm-2 control-label">数量2:</label>
+                                    <div class="col-sm-2">
+                                        <input type="text" class="form-control" name="number12" ng-model="number12" placeholder="请输入转账数量">
+                                    </div>
+                                </div>
+                            </p>
+                        </a>
+                        <a href="javascript:void(0);" class="list-group-item">
+                            <p class="list-group-item-text">
+                                <div class="form-group">
+                                    <label class="text-right col-sm-2 control-label">地址3:</label>
+                                    <div class="col-sm-4 text-left">
+                                        <input type="text" class="form-control" name="toAddress13" ng-model="toAddress13" placeholder="请输入收款方地址">
+                                    </div>
+                                    <label class="col-sm-2 control-label">数量3:</label>
+                                    <div class="col-sm-2">
+                                        <input type="text" class="form-control" name="number13" ng-model="number13" placeholder="请输入转账数量">
+                                    </div>
+                                </div>
+                            </p>
+                        </a>
+                    </div>
+
+                    <div class="list-group">
+                        <a href="javascript:void(0);" class="list-group-item active">
+                            <h4 class="list-group-item-heading">
+                                第二种token
+                            </h4>
+                        </a>
+                        <a href="javascript:void(0);" class="list-group-item">
+                            <p class="list-group-item-text">
+                                <div class="form-group">
+                                    <label class="ctext-right col-sm-2 col-sm-offset-3 control-label">token标识或ID:</label>
+                                    <div class="col-sm-6 text-left">
+                                        <input type="text" class="form-control" name="tokenID2" ng-model="tokenID2">
+                                    </div>
+                                </div>
+                            </p>
+                        </a>
+                        <a href="javascript:void(0);" class="list-group-item">
+                            <p class="list-group-item-text">
+                                <div class="form-group">
+                                    <label class="text-right col-sm-2 control-label">地址1:</label>
+                                    <div class="col-sm-4 text-left">
+                                        <input type="text" class="form-control" name="toAddress21" ng-model="toAddress21" placeholder="请输入收款方地址">
+                                    </div>
+                                    <label class="col-sm-2 control-label">数量1:</label>
+                                    <div class="col-sm-2">
+                                        <input type="text" class="form-control" name="number21" ng-model="number21" placeholder="请输入转账数量">
+                                    </div>
+                                </div>
+                            </p>
+                        </a>
+                        <a href="javascript:void(0);" class="list-group-item">
+                            <p class="list-group-item-text">
+                                <div class="form-group">
+                                    <label class="text-right col-sm-2 control-label">地址2:</label>
+                                    <div class="col-sm-4 text-left">
+                                        <input type="text" class="form-control" name="toAddress22" ng-model="toAddress22" placeholder="请输入收款方地址">
+                                    </div>
+                                    <label class="col-sm-2 control-label">数量2:</label>
+                                    <div class="col-sm-2">
+                                        <input type="text" class="form-control" name="number22" ng-model="number22" placeholder="请输入转账数量">
+                                    </div>
+                                </div>
+                            </p>
+                        </a>
+                        <a href="javascript:void(0);" class="list-group-item">
+                            <p class="list-group-item-text">
+                                <div class="form-group">
+                                    <label class="text-right col-sm-2 control-label">地址3:</label>
+                                    <div class="col-sm-4 text-left">
+                                        <input type="text" class="form-control" name="toAddress23" ng-model="toAddress23" placeholder="请输入收款方地址">
+                                    </div>
+                                    <label class="col-sm-2 control-label">数量3:</label>
+                                    <div class="col-sm-2">
+                                        <input type="text" class="form-control" name="number23" ng-model="number23" placeholder="请输入转账数量">
+                                    </div>
+                                </div>
+                            </p>
+                        </a>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="text-right col-sm-2 control-label">请求前:</label>
+                        <div class="col-sm-6 text-left">
+                            <textarea class="form-control" style="background-color: aquamarine;" rows="6" name="origin" ng-model="origin"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="text-right col-sm-2 control-label">结果:</label>
+                        <div class="col-sm-6 text-left">
+                            <textarea class="form-control" style="background-color:burlywood;" rows="6" name="result" ng-model="result"></textarea>
+                        </div>
+                    </div>
+
+                </form>
+                
+                <hr>
+                <button type="submit" class="btn btn-success" ng-click="transfer1()">多token多地址转账</button>
+            </div>
+        </div>
+    </div>
+    <script src="js/layer/layer.js"></script>
+    <script src="js/json2.js"></script>
+    <script src="js/service/wallet-client.js"></script>
+    <script src="js/service/multi_token_transfer.js"></script>
+    <script>
+        $(function () { $("[data-toggle='tooltip']").tooltip(); });
+    </script>
+</body>
+</html>

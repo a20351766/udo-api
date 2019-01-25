@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<title>删除普通管理者</title>
+
+<head>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script src="js/angular.min.js"></script>
+    <style type="text/css">
+        .container{
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+
+        }
+    </style>
+</head>
+
+<body ng-app="walletApp" ng-controller="walletCtrl" ng-init="nonce=1">
+
+    <div class="container">
+        <div class="row">
+            <div  class="div center-block" style="text-align:center;">
+                <form id="myForm" name="myForm" class="form-horizontal">
+                    <div class="form-group">
+                        <label class="ctext-right col-sm-2 col-sm-offset-3 control-label">语言:</label>
+                        <div class="col-sm-2 text-left">
+                            <select class="form-control" id="lang" name="lang" ng-model="lang">
+                                <option value="">-=请选择=-</option>
+                                <option value="zh">中文</option>
+                                <option value="en">英文</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="text-right col-sm-2 col-sm-offset-3 control-label">钱包地址:</label>
+                        <div class="col-sm-4 text-left">
+                            <input type="text" class="form-control" name="address" ng-model="address" placeholder="请输入钱包地址">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="text-right col-sm-2 col-sm-offset-3 control-label">TOKEN标识:</label>
+                        <div class="col-sm-4 text-left">
+                            <input type="text" class="form-control" name="tokenID" ng-model="tokenID" placeholder="请输入TOKEN标识">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="text-right col-sm-2 col-sm-offset-3 control-label">执行地址私钥:</label>
+                        <div class="col-sm-6 text-left">
+                            <input type="text" class="form-control" name="privateKey" ng-model="privateKey" placeholder="请输入执行地址私钥">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="text-right col-sm-2 col-sm-offset-3 control-label">执行地址:</label>
+                        <div class="col-sm-6 text-left">
+                            <input type="text" class="form-control" name="sender" ng-model="sender" placeholder="请输入执行地址">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="text-right col-sm-2 col-sm-offset-3 control-label">旧地址:</label>
+                        <div class="col-sm-6 text-left">
+                            <input type="text" class="form-control" name="oldAddress" ng-model="oldAddress" placeholder="请输入旧地址">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="text-right col-sm-2 col-sm-offset-3 control-label">请求前:</label>
+                        <div class="col-sm-6 text-left">
+                            <textarea class="form-control" style="background-color: aquamarine;" rows="6" name="origin" ng-model="origin"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="text-right col-sm-2 col-sm-offset-3 control-label">结果:</label>
+                        <div class="col-sm-6 text-left">
+                            <textarea class="form-control" style="background-color:burlywood;" rows="6" name="result" ng-model="result"></textarea>
+                        </div>
+                    </div>
+
+                </form>
+                
+                <hr>
+                <button type="submit" class="btn btn-success" ng-click="transfer()">
+                    确认
+                </button>
+            </div>
+        </div>
+    </div>
+    <script src="js/layer/layer.js"></script>
+    <script src="js/json2.js"></script>
+    <script src="wallet-address-validator/dist/wallet-address-validator.min.js"></script>
+    <script src="js/service/wallet-client.js"></script>
+    <script src="js/service/pldWalletTokenRemoveManager.js"></script>
+</body>
+</html>
