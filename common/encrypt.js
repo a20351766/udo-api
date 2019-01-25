@@ -11,7 +11,9 @@ function encrypt(publicKey, privateKey, text) {
     const cipher = crypto.createCipheriv('aes-256-ctr', secret, iv);
     let crypted = iv.toString('binary');
     crypted += cipher.update(text, 'binary', 'binary');
+    
     crypted += cipher.final('binary');
+
     return crypted;
 }
 /**

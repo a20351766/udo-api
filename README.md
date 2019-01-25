@@ -11,7 +11,7 @@ A sample Node.js app to demonstrate **__udo-client__** & **__udo-ca-client__** N
 * [Download Docker images](https://docker.m-chain.com)
 
 ```
-git clone http://192.168.1.230/udo/udo-api.git
+git clone https://github.com/m-chain/udo-api.git
 cd udo-api
 chmod 777 ./common/clean.sh
 npm install
