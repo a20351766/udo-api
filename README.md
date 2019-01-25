@@ -1,6 +1,6 @@
 ## UDO API
 
-A sample Node.js app to demonstrate **__fabric-client__** & **__fabric-ca-client__** Node.js SDK APIs
+A sample Node.js app to demonstrate **__udo-client__** & **__udo-ca-client__** Node.js SDK APIs
 
 ### Prerequisites and setup:
 
@@ -17,7 +17,7 @@ chmod 777 ./common/clean.sh
 npm install
 npm rebuild
 
-./setupFabricNetwork.sh
+./setupNetwork.sh
 ./createChannelAndInstallChaincode.sh
 ```
 

@@ -1,19 +1,10 @@
 var mysql = require("mysql");
-/*
-const pool = mysql.createPool({
-    connectionLimit: 100,
-    host: 'rm-wz9844gg8zu942tq9ro.mysql.rds.aliyuncs.com',
-    user: 'udolink',
-    password: 'sSHY4wmddyNfRIg',
-    database: 'udo_db',
-    port: '3306'
-});*/
 
 var pool = mysql.createPool({
     connectionLimit: 10,
     host: '127.0.0.1',
     user: 'root',
-    password: '122003',
+    password: 'sssss',
     database: 'udo_db',
     port: '3306'
 });
